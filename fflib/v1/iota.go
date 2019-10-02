@@ -159,3 +159,9 @@ func FormatBits2(dst FormatBitsWriter, u uint64, base int, neg bool) {
 
 	return
 }
+
+func FormatBits2Quoted(dst FormatBitsWriter, u uint64, base int, neg bool) {
+	dst.WriteByte('"')
+	FormatBits2(dst, u, base, neg)
+	dst.WriteByte('"')
+}

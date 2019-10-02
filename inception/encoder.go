@@ -165,10 +165,12 @@ func getGetInnerValue(ic *Inception, name string, typ reflect.Type, ptr bool, fo
 	case reflect.Int,
 		reflect.Int8,
 		reflect.Int16,
-		reflect.Int32,
-		reflect.Int64:
+		reflect.Int32:
 		ic.OutputImports[`fflib "github.com/pquerna/ffjson/fflib/v1"`] = true
 		out += "fflib.FormatBits2(buf, uint64(" + ptname + "), 10, " + ptname + " < 0)" + "\n"
+	case reflect.Int64:
+		ic.OutputImports[`fflib "github.com/pquerna/ffjson/fflib/v1"`] = true
+		out += "fflib.FormatBits2Quoted(buf, uint64(" + ptname + "), 10, " + ptname + " < 0)" + "\n"
 	case reflect.Uint,
 		reflect.Uint8,
 		reflect.Uint16,
